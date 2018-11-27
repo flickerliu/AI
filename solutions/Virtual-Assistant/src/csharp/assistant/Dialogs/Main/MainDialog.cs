@@ -62,7 +62,7 @@ namespace VirtualAssistant
             if (string.IsNullOrEmpty(onboardingState.Name))
             {
                 // This is the first time the user is interacting with the bot, so gather onboarding information.
-                await dc.BeginDialogAsync(nameof(OnboardingDialog));
+                //await dc.BeginDialogAsync(nameof(OnboardingDialog));
             }
         }
 
