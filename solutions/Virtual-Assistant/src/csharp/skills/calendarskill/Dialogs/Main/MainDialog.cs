@@ -28,6 +28,7 @@ namespace CalendarSkill
         private IServiceManager _serviceManager;
         private IStatePropertyAccessor<CalendarSkillState> _stateAccessor;
         private CalendarSkillResponseBuilder _responseBuilder = new CalendarSkillResponseBuilder();
+        private bool _allowAnonymousAccess = false;
 
         public MainDialog(
             ISkillConfiguration services,
@@ -47,7 +48,15 @@ namespace CalendarSkill
             _stateAccessor = _conversationState.CreateProperty<CalendarSkillState>(nameof(CalendarSkillState));
 
             // Register dialogs
-            RegisterDialogs();
+            if (_services.Properties.TryGetValue("allowAnonymousAccess", out object allowAnonymousAccess))
+            {
+                bool.TryParse(allowAnonymousAccess as string, out _allowAnonymousAccess);
+            }
+
+            if (!_allowAnonymousAccess)
+            {
+                RegisterDialogs();
+            }
         }
 
         protected override async Task OnStartAsync(DialogContext dc, CancellationToken cancellationToken = default(CancellationToken))
@@ -80,6 +89,20 @@ namespace CalendarSkill
                 {
                     SkillMode = _skillMode,
                 };
+
+                // if allow anoymous access, just show the recognized intent's name
+                if (_allowAnonymousAccess)
+                {
+                    string message = $"Your intent is '{intent.Value}'. To achive the real experience, please link your account first.";
+                    await dc.Context.SendActivityAsync(dc.Context.Activity.CreateReply(message));
+
+                    if (_skillMode)
+                    {
+                        await CompleteAsync(dc);
+                    }
+
+                    return;
+                }
 
                 // switch on general intents
                 switch (intent)
@@ -271,27 +294,30 @@ namespace CalendarSkill
 
         private async Task<InterruptionAction> OnLogout(DialogContext dc)
         {
-            BotFrameworkAdapter adapter;
-            var supported = dc.Context.Adapter is BotFrameworkAdapter;
-            if (!supported)
+            if (!_allowAnonymousAccess)
             {
-                throw new InvalidOperationException("OAuthPrompt.SignOutUser(): not supported by the current adapter");
-            }
-            else
-            {
-                adapter = (BotFrameworkAdapter)dc.Context.Adapter;
-            }
+                BotFrameworkAdapter adapter;
+                var supported = dc.Context.Adapter is BotFrameworkAdapter;
+                if (!supported)
+                {
+                    throw new InvalidOperationException("OAuthPrompt.SignOutUser(): not supported by the current adapter");
+                }
+                else
+                {
+                    adapter = (BotFrameworkAdapter)dc.Context.Adapter;
+                }
 
-            await dc.CancelAllDialogsAsync();
+                await dc.CancelAllDialogsAsync();
 
-            // Sign out user
-            var tokens = await adapter.GetTokenStatusAsync(dc.Context, dc.Context.Activity.From.Id);
-            foreach (var token in tokens)
-            {
-                await adapter.SignOutUserAsync(dc.Context, token.ConnectionName);
+                // Sign out user
+                var tokens = await adapter.GetTokenStatusAsync(dc.Context, dc.Context.Activity.From.Id);
+                foreach (var token in tokens)
+                {
+                    await adapter.SignOutUserAsync(dc.Context, token.ConnectionName);
+                }
+
+                await dc.Context.SendActivityAsync(dc.Context.Activity.CreateReply(CalendarMainResponses.LogOut));
             }
-
-            await dc.Context.SendActivityAsync(dc.Context.Activity.CreateReply(CalendarMainResponses.LogOut));
 
             return InterruptionAction.StartedDialog;
         }
