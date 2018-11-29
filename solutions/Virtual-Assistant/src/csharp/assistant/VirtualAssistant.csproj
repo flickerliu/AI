@@ -20,7 +20,6 @@
 
   <ItemGroup>
     <PackageReference Include="Google.Apis.Calendar.v3" Version="1.35.2.1363" />
-    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.4.1" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.1.5" />
     <PackageReference Include="Microsoft.Azure.CognitiveServices.ContentModerator" Version="1.0.0" />
     <PackageReference Include="Microsoft.Azure.CognitiveServices.Language" Version="1.0.1-preview" />
@@ -111,6 +110,7 @@
     <ProjectReference Include="..\skills\emailskill\EmailSkill.csproj" />
     <ProjectReference Include="..\skills\pointofinterestskill\PointOfInterestSkill.csproj" />
     <ProjectReference Include="..\skills\todoskill\ToDoSkill.csproj" />
+    <ProjectReference Include="..\skills\WeatherSkill\WeatherSkill.csproj" />
   </ItemGroup>
 
   <ItemGroup>

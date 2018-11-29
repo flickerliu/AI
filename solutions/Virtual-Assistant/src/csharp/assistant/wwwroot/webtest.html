@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -40,24 +41,24 @@
         window.botchatDebug = params['debug'] && params['debug'] === 'true';
 
         const speechOptions = {
-            speechRecognizer: new CognitiveServices.SpeechRecognizer({ locale: 'en-US', subscriptionKey: '3f66871542e74afea25de22881065572' }),
+            speechRecognizer: new CognitiveServices.SpeechRecognizer({ locale: 'en-US', subscriptionKey: '28348d36eaf4483d8d9e9866f34a7821' }),
             speechSynthesizer: new CognitiveServices.SpeechSynthesizer({
                 gender: CognitiveServices.SynthesisGender.Female,
-                subscriptionKey: '3f66871542e74afea25de22881065572',
+                subscriptionKey: '28348d36eaf4483d8d9e9866f34a7821',
                 voiceName: 'Microsoft Server Speech Text to Speech Voice (en-US, JessaRUS)'
             })
         };
 
         BotChat.App({
-            bot: 'bot',
+            bot: bot,
             locale: params['locale'],
             resize: 'detect',
             // sendTyping: true,    // defaults to false. set to true to send 'typing' activities to bot (and other users) when user is typing
             speechOptions: speechOptions,
-            user: 'user',
+            user: user,
             directLine: {
                 domain: params['domain'],
-                secret: params['s'] || 'RDLdTqIYroA.cwA.gOI.OmHE_cxgfUvdFedCQ29VBmsy9yD0N5EdVoq_oVGXXVE',
+                secret: params['s'] || '2m1ZiLIg9fw.cwA.jw8.otmMdvAsTagOdv8kIXNFTz0KwSn4g2mjjGJOi2ygfPs',
                 token: params['t'],
                 webSocket: params['webSocket'] && params['webSocket'] === 'true' // defaults to true
             }
