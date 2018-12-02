@@ -93,8 +93,7 @@ namespace CalendarSkill
                 // if allow anoymous access, just show the recognized intent's name
                 if (_allowAnonymousAccess)
                 {
-                    string message = $"Your intent is '{intent.Value}'. To achive the real experience, please link your account first.";
-                    await dc.Context.SendActivityAsync(dc.Context.Activity.CreateReply(message));
+                    await dc.Context.SendActivityAsync(dc.Context.Activity.CreateReply(CalendarMainResponses.ShowRecognizedUserIntent(intent.Value)));
 
                     if (_skillMode)
                     {

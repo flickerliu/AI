@@ -68,5 +68,14 @@
       }
     ],
     "inputHint": "acceptingInput"
+  },
+  "ShowRecognizedUserIntent": {
+    "replies": [
+      {
+        "text": "Your intent is {0}. However, You haven't linked any accounts yet, if possible please authenticate your assistant to access this service.",
+        "speak": "Your intent is {0}. However,You haven't linked any accounts yet, if possible please authenticate your assistant to access this service."
+      }
+    ],
+    "inputHint": "acceptingInput"
   }
 }

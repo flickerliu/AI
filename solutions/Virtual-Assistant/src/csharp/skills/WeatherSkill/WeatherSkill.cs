@@ -21,7 +21,7 @@ namespace WeatherSkill
         private readonly SkillConfiguration _services;
         private readonly ConversationState _conversationState;
         private readonly UserState _userState;
-        private IServiceManager _serviceManager;
+        private ServiceManager _serviceManager;
         private DialogSet _dialogs;
 
         public WeatherSkill(SkillConfiguration services, ConversationState conversationState, UserState userState, ServiceManager serviceManager = null, bool skillMode = false)

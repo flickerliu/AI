@@ -42,12 +42,12 @@
     <Compile Update="Dialogs\Main\Resources\WeatherSkillMainResponses.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>EmailMainResponses.tt</DependentUpon>
+      <DependentUpon>WeatherSkillMainResponses.tt</DependentUpon>
     </Compile>
     <Compile Update="Dialogs\Shared\Resources\WeatherSkillSharedResponses.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>EmailSharedResponses.tt</DependentUpon>
+      <DependentUpon>WeatherSkillSharedResponses.tt</DependentUpon>
     </Compile>
   </ItemGroup>
 
@@ -69,10 +69,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Update="Dialogs\Main\Resources\WeatherSkillMainResponses.en.json">
+    <Content Update="Dialogs\Main\Resources\WeatherSkillMainResponses.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Update="Dialogs\Shared\Resources\WeatherSkillSharedResponses.en.json">
+    <Content Update="Dialogs\Shared\Resources\WeatherSkillSharedResponses.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
@@ -80,12 +80,12 @@
   <ItemGroup>
     <None Update="Dialogs\Main\Resources\WeatherSkillMainResponses.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>EmailMainResponses.cs</LastGenOutput>
+      <LastGenOutput>WeatherSkillMainResponses.cs</LastGenOutput>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Dialogs\Shared\Resources\WeatherSkillSharedResponses.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>EmailSharedResponses.cs</LastGenOutput>
+      <LastGenOutput>WeatherSkillSharedResponses.cs</LastGenOutput>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Dialogs\Shared\Resources\SharedResponses.tt">

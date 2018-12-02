@@ -1,105 +1,56 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// https://docs.microsoft.com/en-us/visualstudio/modeling/t4-include-directive?view=vs-2017
+// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
-
 using System;
-using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
-using System.Linq;
 using System.Runtime.CompilerServices;
 using Microsoft.Bot.Solutions.Dialogs;
-using Newtonsoft.Json;
 
 namespace WeatherSkill.Dialogs.Main.Resources
 {
     /// <summary>
-    /// Calendar bot responses class.
+    /// Contains bot responses.
     /// </summary>
     public static class WeatherSkillMainResponses
     {
-        private const string JsonFileName = "WeatherSkillMainResponses.*.json";
+        private static readonly ResponseManager _responseManager;
 
-        private static Dictionary<string, Dictionary<string, BotResponse>> jsonResponses;
+        static WeatherSkillMainResponses()
+        {
+            var dir = Path.GetDirectoryName(typeof(WeatherSkillMainResponses).Assembly.Location);
+            var resDir = Path.Combine(dir, @"Dialogs\Main\Resources");
+            _responseManager = new ResponseManager(resDir, "WeatherSkillMainResponses");
+        }
 
-        // Generated code:
-        // This code runs in the text json:
+        // Generated accessors
         public static BotResponse WelcomeMessage => GetBotResponse();
 
         public static BotResponse HelpMessage => GetBotResponse();
 
         public static BotResponse GreetingMessage => GetBotResponse();
 
+        public static BotResponse GoodbyeMessage => GetBotResponse();
+
         public static BotResponse LogOut => GetBotResponse();
 
         public static BotResponse FeatureNotAvailable => GetBotResponse();
 
-        private static Dictionary<string, Dictionary<string, BotResponse>> JsonResponses
-        {
-            get
-            {
-                if (jsonResponses != null)
-                {
-                    return jsonResponses;
-                }
-
-                jsonResponses = new Dictionary<string, Dictionary<string, BotResponse>>();
-                var dir = Path.GetDirectoryName(typeof(WeatherSkillMainResponses).Assembly.Location);
-                var resDir = Path.Combine(dir, "Dialogs\\Main\\Resources");
-
-                var jsonFiles = Directory.GetFiles(resDir, JsonFileName);
-                foreach (var file in jsonFiles)
-                {
-                    var jsonData = File.ReadAllText(file);
-                    var responses = JsonConvert.DeserializeObject<Dictionary<string, BotResponse>>(jsonData);
-                    var key = new FileInfo(file).Name.Split(".")[1].ToLower();
-
-                    jsonResponses.Add(key, responses);
-                }
-
-                return jsonResponses;
-            }
-        }
+        public static BotResponse ShowRecognizedUserIntent(object intent) => GetBotResponseWithParam(intent);
 
         private static BotResponse GetBotResponse([CallerMemberName] string propertyName = null)
         {
-            var locale = CultureInfo.CurrentUICulture.Name;
-            var theK = GetJsonResponseKeyForLocale(locale, propertyName);
-
-            // fall back to parent language
-            if (theK == null)
-            {
-                locale = CultureInfo.CurrentUICulture.Name.Split("-")[0].ToLower();
-                theK = GetJsonResponseKeyForLocale(locale, propertyName);
-
-                // fall back to en
-                if (theK == null)
-                {
-                    locale = "en";
-                    theK = GetJsonResponseKeyForLocale(locale, propertyName);
-                }
-            }
-
-            var botResponse = JsonResponses[locale][theK ?? throw new ArgumentNullException(nameof(propertyName))];
-            return JsonConvert.DeserializeObject<BotResponse>(JsonConvert.SerializeObject(botResponse));
+            return _responseManager.GetBotResponse(propertyName);
         }
 
-        private static string GetJsonResponseKeyForLocale(string locale, string propertyName)
+        private static BotResponse GetBotResponseWithParam(object param, [CallerMemberName] string propertyName = null)
         {
-            try
-            {
-                if (JsonResponses.ContainsKey(locale))
-                {
-                    return JsonResponses[locale].ContainsKey(propertyName) ?
-                        JsonResponses[locale].Keys.FirstOrDefault(k => string.Compare(k, propertyName, StringComparison.CurrentCultureIgnoreCase) == 0) :
-                        null;
-                }
+            var def = _responseManager.GetBotResponse(propertyName);
+            var response = new BotResponse(
+                                           string.Format(def.Reply.Text, param),
+                                           string.Format(def.Reply.Speak, param),
+                                           def.InputHint);
 
-                return null;
-            }
-            catch (KeyNotFoundException)
-            {
-                return null;
-            }
+            return response;
         }
     }
 }

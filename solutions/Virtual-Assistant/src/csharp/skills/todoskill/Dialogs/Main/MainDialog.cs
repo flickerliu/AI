@@ -27,6 +27,7 @@ namespace ToDoSkill
         private ITaskService _serviceManager;
         private IStatePropertyAccessor<ToDoSkillState> _stateAccessor;
         private ToDoSkillResponseBuilder _responseBuilder = new ToDoSkillResponseBuilder();
+        private bool _allowAnonymousAccess = false;
 
         public MainDialog(
             ISkillConfiguration services,
@@ -45,8 +46,16 @@ namespace ToDoSkill
             // Initialize state accessor
             _stateAccessor = _conversationState.CreateProperty<ToDoSkillState>(nameof(ToDoSkillState));
 
-            // RegisterDialogs
-            RegisterDialogs();
+            // Register dialogs
+            if (_services.Properties.TryGetValue("allowAnonymousAccess", out object allowAnonymousAccess))
+            {
+                bool.TryParse(allowAnonymousAccess as string, out _allowAnonymousAccess);
+            }
+
+            if (!_allowAnonymousAccess)
+            {
+                RegisterDialogs();
+            }
         }
 
         protected override async Task OnStartAsync(DialogContext dc, CancellationToken cancellationToken = default(CancellationToken))
@@ -79,6 +88,19 @@ namespace ToDoSkill
                 {
                     SkillMode = _skillMode,
                 };
+
+                // if allow anoymous access, just show the recognized intent's name
+                if (_allowAnonymousAccess)
+                {
+                    await dc.Context.SendActivityAsync(dc.Context.Activity.CreateReply(ToDoMainResponses.ShowRecognizedUserIntent(intent.Value)));
+
+                    if (_skillMode)
+                    {
+                        await CompleteAsync(dc);
+                    }
+
+                    return;
+                }
 
                 // switch on general intents
                 switch (intent)
@@ -258,27 +280,30 @@ namespace ToDoSkill
 
         private async Task<InterruptionAction> OnLogout(DialogContext dc)
         {
-            BotFrameworkAdapter adapter;
-            var supported = dc.Context.Adapter is BotFrameworkAdapter;
-            if (!supported)
+            if (!_allowAnonymousAccess)
             {
-                throw new InvalidOperationException("OAuthPrompt.SignOutUser(): not supported by the current adapter");
-            }
-            else
-            {
-                adapter = (BotFrameworkAdapter)dc.Context.Adapter;
-            }
+                BotFrameworkAdapter adapter;
+                var supported = dc.Context.Adapter is BotFrameworkAdapter;
+                if (!supported)
+                {
+                    throw new InvalidOperationException("OAuthPrompt.SignOutUser(): not supported by the current adapter");
+                }
+                else
+                {
+                    adapter = (BotFrameworkAdapter)dc.Context.Adapter;
+                }
 
-            await dc.CancelAllDialogsAsync();
+                await dc.CancelAllDialogsAsync();
 
-            // Sign out user
-            var tokens = await adapter.GetTokenStatusAsync(dc.Context, dc.Context.Activity.From.Id);
-            foreach (var token in tokens)
-            {
-                await adapter.SignOutUserAsync(dc.Context, token.ConnectionName);
+                // Sign out user
+                var tokens = await adapter.GetTokenStatusAsync(dc.Context, dc.Context.Activity.From.Id);
+                foreach (var token in tokens)
+                {
+                    await adapter.SignOutUserAsync(dc.Context, token.ConnectionName);
+                }
+
+                await dc.Context.SendActivityAsync("Ok, you're signed out.");
             }
-
-            await dc.Context.SendActivityAsync("Ok, you're signed out.");
 
             return InterruptionAction.StartedDialog;
         }

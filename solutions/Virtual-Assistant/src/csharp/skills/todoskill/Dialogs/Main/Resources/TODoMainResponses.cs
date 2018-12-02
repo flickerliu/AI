@@ -35,9 +35,22 @@ namespace ToDoSkill.Dialogs.Main.Resources
 
         public static BotResponse FeatureNotAvailable => GetBotResponse();
 
+        public static BotResponse ShowRecognizedUserIntent(object intent) => GetBotResponseWithParam(intent);
+
         private static BotResponse GetBotResponse([CallerMemberName] string propertyName = null)
         {
             return _responseManager.GetBotResponse(propertyName);
+        }
+
+        private static BotResponse GetBotResponseWithParam(object param, [CallerMemberName] string propertyName = null)
+        {
+            var def = _responseManager.GetBotResponse(propertyName);
+            var response = new BotResponse(
+                                           string.Format(def.Reply.Text, param),
+                                           string.Format(def.Reply.Speak, param),
+                                           def.InputHint);
+
+            return response;
         }
     }
 }

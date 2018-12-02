@@ -28,6 +28,7 @@ namespace EmailSkill
         private IStatePropertyAccessor<EmailSkillState> _stateAccessor;
         private IStatePropertyAccessor<DialogState> _dialogStateAccessor;
         private EmailSkillResponseBuilder _responseBuilder = new EmailSkillResponseBuilder();
+        private bool _allowAnonymousAccess = false;
 
         public MainDialog(ISkillConfiguration services, ConversationState conversationState, UserState userState, IMailSkillServiceManager serviceManager, bool skillMode)
             : base(nameof(MainDialog))
@@ -42,7 +43,16 @@ namespace EmailSkill
             _stateAccessor = _conversationState.CreateProperty<EmailSkillState>(nameof(EmailSkillState));
             _dialogStateAccessor = _conversationState.CreateProperty<DialogState>(nameof(DialogState));
 
-            RegisterDialogs();
+            // Register dialogs
+            if (_services.Properties.TryGetValue("allowAnonymousAccess", out object allowAnonymousAccess))
+            {
+                bool.TryParse(allowAnonymousAccess as string, out _allowAnonymousAccess);
+            }
+
+            if (!_allowAnonymousAccess)
+            {
+                RegisterDialogs();
+            }
         }
 
         protected override async Task OnStartAsync(DialogContext dc, CancellationToken cancellationToken = default(CancellationToken))
@@ -75,6 +85,19 @@ namespace EmailSkill
                 {
                     SkillMode = _skillMode,
                 };
+
+                // if allow anoymous access, just show the recognized intent's name
+                if (_allowAnonymousAccess)
+                {
+                    await dc.Context.SendActivityAsync(dc.Context.Activity.CreateReply(EmailMainResponses.ShowRecognizedUserIntent(intent.Value)));
+
+                    if (_skillMode)
+                    {
+                        await CompleteAsync(dc);
+                    }
+
+                    return;
+                }
 
                 // switch on general intents
                 switch (intent)
@@ -258,27 +281,30 @@ namespace EmailSkill
 
         private async Task<InterruptionAction> OnLogout(DialogContext dc)
         {
-            BotFrameworkAdapter adapter;
-            var supported = dc.Context.Adapter is BotFrameworkAdapter;
-            if (!supported)
+            if (!_allowAnonymousAccess)
             {
-                throw new InvalidOperationException("OAuthPrompt.SignOutUser(): not supported by the current adapter");
-            }
-            else
-            {
-                adapter = (BotFrameworkAdapter)dc.Context.Adapter;
-            }
+                BotFrameworkAdapter adapter;
+                var supported = dc.Context.Adapter is BotFrameworkAdapter;
+                if (!supported)
+                {
+                    throw new InvalidOperationException("OAuthPrompt.SignOutUser(): not supported by the current adapter");
+                }
+                else
+                {
+                    adapter = (BotFrameworkAdapter)dc.Context.Adapter;
+                }
 
-            await dc.CancelAllDialogsAsync();
+                await dc.CancelAllDialogsAsync();
 
-            // Sign out user
-            var tokens = await adapter.GetTokenStatusAsync(dc.Context, dc.Context.Activity.From.Id);
-            foreach (var token in tokens)
-            {
-                await adapter.SignOutUserAsync(dc.Context, token.ConnectionName);
+                // Sign out user
+                var tokens = await adapter.GetTokenStatusAsync(dc.Context, dc.Context.Activity.From.Id);
+                foreach (var token in tokens)
+                {
+                    await adapter.SignOutUserAsync(dc.Context, token.ConnectionName);
+                }
+
+                await dc.Context.SendActivityAsync(dc.Context.Activity.CreateReply(EmailMainResponses.LogOut));
             }
-
-            await dc.Context.SendActivityAsync(dc.Context.Activity.CreateReply(EmailMainResponses.LogOut));
 
             return InterruptionAction.StartedDialog;
         }

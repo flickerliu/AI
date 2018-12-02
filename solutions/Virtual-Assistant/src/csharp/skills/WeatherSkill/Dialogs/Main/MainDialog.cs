@@ -21,7 +21,7 @@ namespace WeatherSkill
     public class MainDialog : RouterDialog
     {
         private bool _skillMode;
-        private SkillConfiguration _services;
+        private ISkillConfiguration _services;
         private UserState _userState;
         private ConversationState _conversationState;
         private IServiceManager _serviceManager;
