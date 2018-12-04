@@ -1,0 +1,35 @@
+Utterance	Intents
+forget me	l_SAICVADemo_Email, l_SAICVADemo_General
+don't	l_SAICVADemo_Email, l_SAICVADemo_General
+signout	l_SAICVADemo_Email, l_SAICVADemo_General
+hello	l_SAICVADemo_Email, l_SAICVADemo_General
+don't do that	l_SAICVADemo_Email, l_SAICVADemo_General
+good morning	l_SAICVADemo_Email, l_SAICVADemo_General
+contact support	l_SAICVADemo_Email, l_SAICVADemo_General
+abort	l_SAICVADemo_Email, l_SAICVADemo_General
+hello bot	l_SAICVADemo_Email, l_SAICVADemo_General
+what can i say	l_SAICVADemo_Email, l_SAICVADemo_General
+talk to a human	l_SAICVADemo_Email, l_SAICVADemo_General
+goodbye	l_SAICVADemo_Email, l_SAICVADemo_General
+start over	l_SAICVADemo_Email, l_SAICVADemo_General
+move back	l_SAICVADemo_Email, l_SAICVADemo_General
+i would like to cancel	l_SAICVADemo_Email, l_SAICVADemo_General
+show next	l_SAICVADemo_General, l_SAICVADemo_ToDo
+what can you help me with	l_SAICVADemo_Email, l_SAICVADemo_General
+undo	l_SAICVADemo_Email, l_SAICVADemo_General
+logout	l_SAICVADemo_Email, l_SAICVADemo_General
+can i talk to a person	l_SAICVADemo_Email, l_SAICVADemo_General
+help	l_SAICVADemo_Email, l_SAICVADemo_General
+log out	l_SAICVADemo_Email, l_SAICVADemo_General
+go back	l_SAICVADemo_Calendar, l_SAICVADemo_Email, l_SAICVADemo_General
+restart	l_SAICVADemo_Email, l_SAICVADemo_General
+that's it thanks	l_SAICVADemo_Email, l_SAICVADemo_General
+go to previous	l_SAICVADemo_Email, l_SAICVADemo_General
+cancel	l_SAICVADemo_Email, l_SAICVADemo_General
+never mind	l_SAICVADemo_Email, l_SAICVADemo_General
+exit	l_SAICVADemo_Email, l_SAICVADemo_General
+what do i do now	l_SAICVADemo_Email, l_SAICVADemo_General
+hey	l_SAICVADemo_Email, l_SAICVADemo_General
+next	l_SAICVADemo_General, l_SAICVADemo_ToDo
+ok bye	l_SAICVADemo_Email, l_SAICVADemo_General
+what can you do	l_SAICVADemo_Email, l_SAICVADemo_General

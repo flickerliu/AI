@@ -10,8 +10,8 @@
 
 <body>
     <div id="bot"></div>
-    <script src="https://cdn.botframework.com/botframework-webchat/latest/botchat.js"></script>
-    <script src="https://cdn.botframework.com/botframework-webchat/latest/CognitiveServices.js"></script>
+    <script src="Scripts/botchat.js"></script>
+    <script src="Scripts/CognitiveServices.js"></script>
     <script>
         const params = BotChat.queryParams(location.search);
         var org = params['org'] || "user";
@@ -45,7 +45,7 @@
             speechSynthesizer: new CognitiveServices.SpeechSynthesizer({
                 gender: CognitiveServices.SynthesisGender.Female,
                 subscriptionKey: '28348d36eaf4483d8d9e9866f34a7821',
-                voiceName: 'Microsoft Server Speech Text to Speech Voice (en-US, JessaRUS)'
+                voiceName: 'Microsoft Server Speech Text to Speech Voice (en-US, ZiraRUS)'
             })
         };
 

@@ -1,0 +1,4 @@
+Utterance	Intents
+i would like to cancel	l_SAICVADemo_Email, l_SAICVADemo_General
+logout	l_SAICVADemo_Email, l_SAICVADemo_General
+can i talk to a person	l_SAICVADemo_Email, l_SAICVADemo_General

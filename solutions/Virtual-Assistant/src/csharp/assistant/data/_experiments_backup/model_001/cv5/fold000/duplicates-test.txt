@@ -1,0 +1,5 @@
+Utterance	Intents
+hello bot	l_SAICVADemo_Email, l_SAICVADemo_General
+move back	l_SAICVADemo_Email, l_SAICVADemo_General
+go back	l_SAICVADemo_Calendar, l_SAICVADemo_General
+abort	l_SAICVADemo_Email, l_SAICVADemo_General

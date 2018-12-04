@@ -1,0 +1,8 @@
+Intent	Utterance Count	Utterance Average Length	Utterance Maximum Length	Utterance Minimum Length	Utterance Length StdDev
+l_SAICVADemo_Calendar	918	33.446	123	4	14.491
+l_SAICVADemo_Email	394	29.832	100	1	14.32
+l_SAICVADemo_General	90	12.167	28	2	6.343
+l_SAICVADemo_PointOfInterest	11949	45.722	154	5	23.581
+l_SAICVADemo_ToDo	243	32.317	68	10	11.166
+l_SAICVADemo_Weather	26	38.115	63	18	11.765
+q_FAQ	9	24.333	39	10	8.485

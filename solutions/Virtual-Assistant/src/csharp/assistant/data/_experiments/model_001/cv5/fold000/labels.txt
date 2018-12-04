@@ -1,0 +1,8 @@
+Label	LabelName	Samples
+0	l_SAICVADemo_Calendar	918
+1	l_SAICVADemo_Email	394
+2	l_SAICVADemo_General	91
+3	l_SAICVADemo_PointOfInterest	11949
+4	l_SAICVADemo_ToDo	243
+5	l_SAICVADemo_Weather	31
+6	q_FAQ	24

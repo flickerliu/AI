@@ -1,0 +1,5 @@
+Utterance	Intents
+what do i do now	l_SAICVADemo_Email, l_SAICVADemo_General
+don't do that	l_SAICVADemo_Email, l_SAICVADemo_General
+exit	l_SAICVADemo_Email, l_SAICVADemo_General
+never mind	l_SAICVADemo_Email, l_SAICVADemo_General

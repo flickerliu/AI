@@ -1,0 +1,5 @@
+Utterance	Intents
+restart	l_SAICVADemo_Email, l_SAICVADemo_General
+go to previous	l_SAICVADemo_Email, l_SAICVADemo_General
+start over	l_SAICVADemo_Email, l_SAICVADemo_General
+that's it thanks	l_SAICVADemo_Email, l_SAICVADemo_General

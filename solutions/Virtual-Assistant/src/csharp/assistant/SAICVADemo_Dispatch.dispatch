@@ -1,0 +1,91 @@
+{
+  "authoringRegion": "westus",
+  "hierarchical": true,
+  "services": [
+    {
+      "appId": "1ee6793e-dfda-442c-a612-3ebed6757e48",
+      "authoringKey": "e9af031eb2b84bc6bde8dd0504eee5e5",
+      "subscriptionKey": "e9af031eb2b84bc6bde8dd0504eee5e5",
+      "version": "0.1",
+      "region": "westus",
+      "type": "luis",
+      "name": "SAICVADemo_Calendar",
+      "id": "calendar"
+    },
+    {
+      "appId": "b330305c-cd92-4feb-aac3-304d24704e1a",
+      "authoringKey": "e9af031eb2b84bc6bde8dd0504eee5e5",
+      "subscriptionKey": "e9af031eb2b84bc6bde8dd0504eee5e5",
+      "version": "0.1",
+      "region": "westus",
+      "type": "luis",
+      "name": "SAICVADemo_Email",
+      "id": "email"
+    },
+    {
+      "appId": "0158bcf2-b753-492f-8f86-d6913d130fcc",
+      "authoringKey": "e9af031eb2b84bc6bde8dd0504eee5e5",
+      "subscriptionKey": "e9af031eb2b84bc6bde8dd0504eee5e5",
+      "version": "0.1",
+      "region": "westus",
+      "type": "luis",
+      "name": "SAICVADemo_ToDo",
+      "id": "todo"
+    },
+    {
+      "appId": "dca56853-7eac-4304-afe1-26b7af5d9157",
+      "authoringKey": "e9af031eb2b84bc6bde8dd0504eee5e5",
+      "subscriptionKey": "e9af031eb2b84bc6bde8dd0504eee5e5",
+      "version": "0.1",
+      "region": "westus",
+      "type": "luis",
+      "name": "SAICVADemo_PointOfInterest",
+      "id": "pointofinterest"
+    },
+    {
+      "appId": "9df2f3b7-4106-40d6-a661-1f744c352c53",
+      "authoringKey": "e9af031eb2b84bc6bde8dd0504eee5e5",
+      "subscriptionKey": "e9af031eb2b84bc6bde8dd0504eee5e5",
+      "version": "0.1",
+      "region": "westus",
+      "type": "luis",
+      "name": "SAICVADemo_General",
+      "id": "general"
+    },
+    {
+      "kbId": "46cc7f2a-ed08-49ea-b269-eb48a1015518",
+      "subscriptionKey": "e500201463ec43b59a7edb261d357e00",
+      "hostname": "https://saicvademo-qnahost.azurewebsites.net/qnamaker",
+      "endpointKey": "ef18ac3a-e370-4db3-90d9-1561244fb2d0",
+      "type": "qna",
+      "name": "FAQ",
+      "id": "faq"
+    },
+    {
+      "appId": "110e4082-2701-47d9-9606-96c9a7007f8c",
+      "authoringKey": "e9af031eb2b84bc6bde8dd0504eee5e5",
+      "subscriptionKey": "e90a86ee361d4e9ba59bd055b6afc383",
+      "version": "0.1",
+      "region": "westus",
+      "type": "luis",
+      "name": "SAICVADemo_Weather",
+      "id": "weather"
+    }
+  ],
+  "serviceIds": [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7"
+  ],
+  "appId": "0e5dfb7f-177a-4841-a908-e05ff16dd29d",
+  "authoringKey": "e9af031eb2b84bc6bde8dd0504eee5e5",
+  "subscriptionKey": "e9af031eb2b84bc6bde8dd0504eee5e5",
+  "version": "Dispatch",
+  "region": "westus",
+  "type": "dispatch",
+  "name": "SAICVADemo_Dispatch"
+}

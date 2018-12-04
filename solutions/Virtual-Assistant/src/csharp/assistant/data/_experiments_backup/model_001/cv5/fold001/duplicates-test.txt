@@ -1,0 +1,4 @@
+Utterance	Intents
+hi	l_SAICVADemo_Email, l_SAICVADemo_General
+disregard	l_SAICVADemo_Email, l_SAICVADemo_General
+sign out	l_SAICVADemo_Email, l_SAICVADemo_General

@@ -73,12 +73,12 @@ namespace VirtualAssistant
 
             // No dialog is currently on the stack and we haven't responded to the user
             // Check dispatch result
-            var dispatchResult = await _services.DispatchRecognizer.RecognizeAsync<Dispatch>(dc.Context, CancellationToken.None);
+            var dispatchResult = await _services.DispatchRecognizer.RecognizeAsync<SAICVADemo_Dispatch>(dc.Context, CancellationToken.None);
             var intent = dispatchResult.TopIntent().intent;
 
             switch (intent)
             {
-                case Dispatch.Intent.l_General:
+                case SAICVADemo_Dispatch.Intent.l_SAICVADemo_General:
                     {
                         // If dispatch result is general luis model
                         var luisService = _services.LuisServices["general"];
@@ -154,10 +154,11 @@ namespace VirtualAssistant
                         break;
                     }
 
-                case Dispatch.Intent.l_Calendar:
-                case Dispatch.Intent.l_Email:
-                case Dispatch.Intent.l_ToDo:
-                case Dispatch.Intent.l_PointOfInterest:
+                case SAICVADemo_Dispatch.Intent.l_SAICVADemo_Calendar:
+                case SAICVADemo_Dispatch.Intent.l_SAICVADemo_Email:
+                case SAICVADemo_Dispatch.Intent.l_SAICVADemo_ToDo:
+                case SAICVADemo_Dispatch.Intent.l_SAICVADemo_PointOfInterest:
+                case SAICVADemo_Dispatch.Intent.l_SAICVADemo_Weather:
                     {
                         virtualAssistantState.LastIntent = intent.ToString();
                         var matchedSkill = _skillRouter.IdentifyRegisteredSkill(intent.ToString());
@@ -171,7 +172,7 @@ namespace VirtualAssistant
                         break;
                     }
 
-                case Dispatch.Intent.q_FAQ:
+                case SAICVADemo_Dispatch.Intent.q_FAQ:
                     {
                         var qnaService = _services.QnAServices["faq"];
                         var answers = await qnaService.GetAnswersAsync(dc.Context);
@@ -242,7 +243,7 @@ namespace VirtualAssistant
                     case Events.ActiveLocationUpdate:
                     case Events.ActiveRouteUpdate:
                         {
-                            var matchedSkill = _skillRouter.IdentifyRegisteredSkill(Dispatch.Intent.l_PointOfInterest.ToString());
+                            var matchedSkill = _skillRouter.IdentifyRegisteredSkill(SAICVADemo_Dispatch.Intent.l_SAICVADemo_PointOfInterest.ToString());
 
                             await RouteToSkillAsync(dc, new SkillDialogOptions()
                             {
