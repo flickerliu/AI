@@ -89,7 +89,8 @@ namespace EmailSkill
                 // if allow anoymous access, just show the recognized intent's name
                 if (_allowAnonymousAccess)
                 {
-                    await dc.Context.SendActivityAsync(dc.Context.Activity.CreateReply(EmailMainResponses.ShowRecognizedUserIntent(intent.Value)));
+                    var reply = EmailMainResponses.ShowRecognizedUserIntent(intent.Value);
+                    await dc.Context.SendActivityAsync(dc.Context.Activity.CreateReply(reply));
 
                     if (_skillMode)
                     {

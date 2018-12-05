@@ -2,8 +2,8 @@
   "WelcomeMessage": {
     "replies": [
       {
-        "text": "Welcome to your new skill!",
-        "speak": "Welcome to your new skill!"
+        "text": "Welcome to the weather skill!",
+        "speak": "Welcome to the weather skill!"
       }
     ],
     "inputHint": "expectingInput"

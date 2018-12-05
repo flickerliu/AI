@@ -29,26 +29,32 @@ namespace WeatherSkill
 
         public WeatherSkillDialog(
             string dialogId,
-            SkillConfiguration services,
-            IStatePropertyAccessor<WeatherSkillState> accessor,
+            ISkillConfiguration services,
+            IStatePropertyAccessor<WeatherSkillState> emailStateAccessor,
+            IStatePropertyAccessor<DialogState> dialogStateAccessor,
             IServiceManager serviceManager)
             : base(dialogId)
         {
-            _services = services;
-            _accessor = accessor;
-            _serviceManager = serviceManager;
-
-            var oauthSettings = new OAuthPromptSettings()
-            {
-                ConnectionName = _services.ToString() ?? throw new Exception("The authentication connection has not been initialized."),
-                Text = $"Authentication",
-                Title = "Signin",
-                Timeout = 300000, // User has 5 minutes to login
-            };
-
-            AddDialog(new EventPrompt(SkillModeAuth, "tokens/response", TokenResponseValidator));
-            AddDialog(new OAuthPrompt(LocalModeAuth, oauthSettings, AuthPromptValidator));
+            Services = services;
+            EmailStateAccessor = emailStateAccessor;
+            DialogStateAccessor = dialogStateAccessor;
+            ServiceManager = serviceManager;
         }
+
+        protected WeatherSkillDialog(string dialogId)
+            : base(dialogId)
+        {
+        }
+
+        protected ISkillConfiguration Services { get; set; }
+
+        protected IStatePropertyAccessor<WeatherSkillState> EmailStateAccessor { get; set; }
+
+        protected IStatePropertyAccessor<DialogState> DialogStateAccessor { get; set; }
+
+        protected IServiceManager ServiceManager { get; set; }
+
+        protected WeatherSkillResponseBuilder ResponseBuilder { get; set; } = new WeatherSkillResponseBuilder();
 
         protected override async Task<DialogTurnResult> OnBeginDialogAsync(DialogContext dc, object options, CancellationToken cancellationToken = default(CancellationToken))
         {
@@ -157,7 +163,7 @@ namespace WeatherSkill
 
      
         // Helpers
-        public async Task DigestLuisResult(DialogContext dc, Skill luisResult)
+        public async Task DigestLuisResult(DialogContext dc, Weather luisResult)
         {
             try
             {

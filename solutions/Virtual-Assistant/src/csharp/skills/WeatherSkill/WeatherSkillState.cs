@@ -14,6 +14,8 @@ namespace WeatherSkill
 
         }
 
-        public Skill LuisResult { get; set; }
+        public Luis.Weather LuisResult { get; set; }
+
+        public Luis.General GeneralLuisResult { get; set; }
     }
 }
