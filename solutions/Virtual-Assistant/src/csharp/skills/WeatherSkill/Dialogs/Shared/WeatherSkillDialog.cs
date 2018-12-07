@@ -22,23 +22,20 @@ namespace WeatherSkill
         public const string LocalModeAuth = "LocalAuth";
 
         // Fields
-        protected SkillConfiguration _services;
-        protected IStatePropertyAccessor<WeatherSkillState> _accessor;
-        protected IServiceManager _serviceManager;
         protected WeatherSkillResponseBuilder _responseBuilder = new WeatherSkillResponseBuilder();
 
         public WeatherSkillDialog(
             string dialogId,
             ISkillConfiguration services,
-            IStatePropertyAccessor<WeatherSkillState> emailStateAccessor,
+            IStatePropertyAccessor<WeatherSkillState> weatherStateAccessor,
             IStatePropertyAccessor<DialogState> dialogStateAccessor,
             IServiceManager serviceManager)
             : base(dialogId)
         {
             Services = services;
-            EmailStateAccessor = emailStateAccessor;
+            WeatherStateAccessor = weatherStateAccessor;
             DialogStateAccessor = dialogStateAccessor;
-            ServiceManager = serviceManager;
+            WeatherServiceManager = serviceManager;
         }
 
         protected WeatherSkillDialog(string dialogId)
@@ -48,24 +45,24 @@ namespace WeatherSkill
 
         protected ISkillConfiguration Services { get; set; }
 
-        protected IStatePropertyAccessor<WeatherSkillState> EmailStateAccessor { get; set; }
+        protected IStatePropertyAccessor<WeatherSkillState> WeatherStateAccessor { get; set; }
 
         protected IStatePropertyAccessor<DialogState> DialogStateAccessor { get; set; }
 
-        protected IServiceManager ServiceManager { get; set; }
+        protected IServiceManager WeatherServiceManager { get; set; }
 
         protected WeatherSkillResponseBuilder ResponseBuilder { get; set; } = new WeatherSkillResponseBuilder();
 
         protected override async Task<DialogTurnResult> OnBeginDialogAsync(DialogContext dc, object options, CancellationToken cancellationToken = default(CancellationToken))
         {
-            var state = await _accessor.GetAsync(dc.Context);
+            var state = await WeatherStateAccessor.GetAsync(dc.Context);
             await DigestLuisResult(dc, state.LuisResult);
             return await base.OnBeginDialogAsync(dc, options, cancellationToken);
         }
 
         protected override async Task<DialogTurnResult> OnContinueDialogAsync(DialogContext dc, CancellationToken cancellationToken = default(CancellationToken))
         {
-            var state = await _accessor.GetAsync(dc.Context);
+            var state = await WeatherStateAccessor.GetAsync(dc.Context);
             await DigestLuisResult(dc, state.LuisResult);
             return await base.OnContinueDialogAsync(dc, cancellationToken);
         }
@@ -131,7 +128,7 @@ namespace WeatherSkill
 
                 if (tokenResponse != null)
                 {
-                    var state = await _accessor.GetAsync(sc.Context);
+                    var state = await WeatherStateAccessor.GetAsync(sc.Context);
                 }
 
                 return await sc.NextAsync();
@@ -167,9 +164,31 @@ namespace WeatherSkill
         {
             try
             {
-                var state = await _accessor.GetAsync(dc.Context);
+                var state = await WeatherStateAccessor.GetAsync(dc.Context);
 
                 // extract entities and store in state here.
+
+                if (luisResult.Entities.Weather_Location.Length>0)
+                {
+                    state.Locations.Clear();
+                    foreach (var location in luisResult.Entities.Weather_Location)
+                    {
+                        if (!state.Locations.Contains(location))
+                        {
+                            state.Locations.Add(location);
+                        }
+                    }
+                }
+
+                if (luisResult.Entities.datetime.Length > 0)
+                {
+                    state.ForcastDates.Clear();
+                    foreach (var datespc in luisResult.Entities.datetime)
+                    {
+
+                    }
+                }
+
             }
             catch
             {

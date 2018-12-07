@@ -27,6 +27,7 @@ namespace WeatherSkill
         private ConversationState _conversationState;
         private IServiceManager _serviceManager;
         private IStatePropertyAccessor<WeatherSkillState> _stateAccessor;
+        private IStatePropertyAccessor<DialogState> _dialogStateAccessor;
         private WeatherSkillResponseBuilder _responseBuilder = new WeatherSkillResponseBuilder();
         private bool _allowAnonymousAccess = false;
 
@@ -41,6 +42,7 @@ namespace WeatherSkill
 
             // Initialize state accessor
             _stateAccessor = _conversationState.CreateProperty<WeatherSkillState>(nameof(WeatherSkillState));
+            _dialogStateAccessor = _conversationState.CreateProperty<DialogState>(nameof(DialogState));
 
             // Register dialogs
             if (_services.Properties.TryGetValue("allowAnonymousAccess", out object allowAnonymousAccess))
@@ -48,10 +50,7 @@ namespace WeatherSkill
                 bool.TryParse(allowAnonymousAccess as string, out _allowAnonymousAccess);
             }
 
-            if (!_allowAnonymousAccess)
-            {
-                RegisterDialogs();
-            }
+            RegisterDialogs();
         }
 
         protected override async Task OnStartAsync(DialogContext dc, CancellationToken cancellationToken = default(CancellationToken))
@@ -77,6 +76,8 @@ namespace WeatherSkill
             else
             {
                 var result = await luisService.RecognizeAsync<Weather>(dc.Context, CancellationToken.None);
+                state.LuisResult = result;
+
                 var intent = result?.TopIntent().intent;
                 var generalTopIntent = state.GeneralLuisResult?.TopIntent().intent;
 
@@ -257,6 +258,7 @@ namespace WeatherSkill
 
         private void RegisterDialogs()
         {
+            AddDialog(new WeatherForecastDialog(_services, _stateAccessor, _dialogStateAccessor, _serviceManager));
             AddDialog(new CancelDialog());
         }
 
