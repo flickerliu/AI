@@ -92,6 +92,11 @@ namespace WeatherSkill
                     case Weather.Intent.Weather_GetForecast:
                         {
                             await dc.BeginDialogAsync(nameof(WeatherForecastDialog), skillOptions);
+                            if (_skillMode)
+                            {
+                                await CompleteAsync(dc);
+                            }
+
                             break;
                         }
 

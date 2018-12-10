@@ -59,10 +59,19 @@ namespace VirtualAssistant
             var view = new MainResponses();
             await view.ReplyWith(dc.Context, MainResponses.Intro);
 
-            if (string.IsNullOrEmpty(onboardingState.Name))
+            var allowAnonymousAccess = false;
+            if (_services.SkillConfigurations.TryGetValue("calendarSkill", out ISkillConfiguration skill))
+            {
+                if (skill.Properties.TryGetValue("allowAnonymousAccess", out object allowObject))
+                {
+                    bool.TryParse(allowObject as string, out allowAnonymousAccess);
+                }
+            }
+
+            if (string.IsNullOrEmpty(onboardingState.Name) && !allowAnonymousAccess)
             {
                 // This is the first time the user is interacting with the bot, so gather onboarding information.
-                //await dc.BeginDialogAsync(nameof(OnboardingDialog));
+                await dc.BeginDialogAsync(nameof(OnboardingDialog));
             }
         }
 
