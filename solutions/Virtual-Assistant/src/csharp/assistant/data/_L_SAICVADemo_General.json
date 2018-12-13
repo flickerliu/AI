@@ -33,6 +33,12 @@
       "name": "Previous"
     },
     {
+      "name": "QueryOtherDate"
+    },
+    {
+      "name": "QueryOtherLocation"
+    },
+    {
       "name": "Restart"
     }
   ],
@@ -44,6 +50,10 @@
   "prebuiltEntities": [
     {
       "name": "datetimeV2",
+      "roles": []
+    },
+    {
+      "name": "geographyV2",
       "roles": []
     },
     {
@@ -63,6 +73,16 @@
     {
       "text": "advance",
       "intent": "Next",
+      "entities": []
+    },
+    {
+      "text": "and shanghai?",
+      "intent": "QueryOtherLocation",
+      "entities": []
+    },
+    {
+      "text": "and the day after tomorrow?",
+      "intent": "QueryOtherDate",
       "entities": []
     },
     {
@@ -243,6 +263,16 @@
     {
       "text": "hiya",
       "intent": "Greeting",
+      "entities": []
+    },
+    {
+      "text": "how about shenzhen?",
+      "intent": "QueryOtherLocation",
+      "entities": []
+    },
+    {
+      "text": "how about tomorrow?",
+      "intent": "QueryOtherDate",
       "entities": []
     },
     {

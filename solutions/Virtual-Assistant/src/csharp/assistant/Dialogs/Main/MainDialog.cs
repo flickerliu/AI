@@ -135,6 +135,8 @@ namespace VirtualAssistant
 
                                 case General.Intent.Next:
                                 case General.Intent.Previous:
+                                case General.Intent.QueryOtherDate:
+                                case General.Intent.QueryOtherLocation:
                                     {
                                         var lastExecutedIntent = virtualAssistantState.LastIntent;
                                         if (lastExecutedIntent != null)

@@ -1,0 +1,2 @@
+Utterance	Intents
+what is the weather today at 10 day durham	l_SAICVADemo_General, l_SAICVADemo_Weather

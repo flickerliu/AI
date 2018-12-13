@@ -59,10 +59,10 @@ namespace WeatherSkill
             {
                 var state = await WeatherStateAccessor.GetAsync(sc.Context);
 
-                if (state.ForcastDates.Count == 0)
+                if (state.ForecastTimes.Count == 0)
                 {
                     //set the default date as today
-                    state.ForcastDates = new List<DateTime> { DateTime.Now };
+                    state.ForecastTimes = new List<ForecastTime> { new ForecastTime { StartTime = null, Type = ForecastType.Day } };
                 }
 
                 return await sc.NextAsync();
@@ -81,9 +81,11 @@ namespace WeatherSkill
 
                 foreach (var location in state.Locations)
                 {
-                    foreach (var date in state.ForcastDates)
+                    foreach (var start in state.ForecastTimes)
                     {
-                        var text = await ServiceManager.ForcastService.GenerateForcastMessage(location);                        
+                        var text = start.Type == ForecastType.Day ?
+                                    await ServiceManager.ForcastService.GenerateForcastMessageDaily(location, start.StartTime) :
+                                    await ServiceManager.ForcastService.GenerateForcastMessageHourly(location, start.StartTime);
 
                         var replyMessage = sc.Context.Activity.CreateReply(text);
                         await sc.Context.SendActivityAsync(replyMessage);

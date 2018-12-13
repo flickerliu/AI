@@ -7,6 +7,9 @@ namespace WeatherSkill.ServiceClients
 {
     public interface IWeatherForecast
     {
-        Task<string> GenerateForcastMessage(string location);
+        Task<string> GenerateForcastMessageDaily(string location, DateTime? startdate);
+
+        Task<string> GenerateForcastMessageHourly(string location, DateTime? starttime);
+
     }
 }

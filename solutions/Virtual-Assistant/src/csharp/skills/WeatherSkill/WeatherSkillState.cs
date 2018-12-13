@@ -6,21 +6,28 @@ using System.Collections.Generic;
 
 namespace WeatherSkill
 {
+    public enum ForecastType {Hour, Day};
+    public class ForecastTime
+    {
+        public ForecastType Type;
+        public DateTime? StartTime;
+    }
+
     public class WeatherSkillState
     {
         public List<string> Locations;
-        public List<DateTime> ForcastDates;
+        public List<ForecastTime> ForecastTimes;
 
         public WeatherSkillState()
         {
             Locations = new List<string>();
-            ForcastDates = new List<DateTime>();
+            ForecastTimes = new List<ForecastTime>();
         }
 
         public void Clear()
         {
             Locations.Clear();
-            ForcastDates.Clear();
+            ForecastTimes.Clear();
         }
 
         public Luis.Weather LuisResult { get; set; }

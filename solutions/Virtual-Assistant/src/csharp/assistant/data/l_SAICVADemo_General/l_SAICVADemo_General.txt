@@ -1,5 +1,7 @@
 abort
 advance
+and shanghai
+and the day after tomorrow
 back to the last one
 bring the previous one
 bye
@@ -36,6 +38,8 @@ help please
 hey
 hi
 hiya
+how about shenzhen
+how about tomorrow
 how are you
 how are you today
 i don't understand

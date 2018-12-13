@@ -1,0 +1,6 @@
+Utterance	Intents
+i want to know the temperature at death valley	l_SAICVADemo_General, l_SAICVADemo_Weather
+what is the weather today at 10 day durham	l_SAICVADemo_General, l_SAICVADemo_Weather
+provide me by toronto weather please	l_SAICVADemo_General, l_SAICVADemo_Weather
+show me the forecast at alabama	l_SAICVADemo_General, l_SAICVADemo_Weather
+what is the weather in redmond	l_SAICVADemo_General, l_SAICVADemo_Weather

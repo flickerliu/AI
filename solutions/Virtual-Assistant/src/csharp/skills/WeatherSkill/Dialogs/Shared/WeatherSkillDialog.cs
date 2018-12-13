@@ -168,7 +168,7 @@ namespace WeatherSkill
 
                 // extract entities and store in state here.
 
-                if (luisResult.Entities.Weather_Location.Length>0)
+                if (luisResult.Entities.Weather_Location!=null && luisResult.Entities.Weather_Location.Length>0)
                 {
                     state.Locations.Clear();
                     foreach (var location in luisResult.Entities.Weather_Location)
@@ -180,12 +180,37 @@ namespace WeatherSkill
                     }
                 }
 
-                if (luisResult.Entities.datetime.Length > 0)
+                if (luisResult.Entities.datetime!= null && luisResult.Entities.datetime.Length > 0)
                 {
-                    state.ForcastDates.Clear();
-                    foreach (var datespc in luisResult.Entities.datetime)
+                    state.ForecastTimes.Clear();
+                    foreach (var datespcs in luisResult.Entities.datetime)
                     {
+                       switch (datespcs.Type)
+                        {
+                            case "date":
+                                if (datespcs.Expressions.Count > 0)
+                                {
+                                    var forecast = new ForecastTime { StartTime = null, Type = ForecastType.Day };
+                                    if (DateTime.TryParse(datespcs.Expressions[0], out DateTime time))
+                                    {
+                                        forecast.StartTime = time;
+                                    }
+                                    state.ForecastTimes.Add(forecast);
+                                }
+                                break;
 
+                            case "datetime":
+                                if (datespcs.Expressions.Count > 0)
+                                {
+                                    var forecast = new ForecastTime { StartTime = null, Type = ForecastType.Hour };
+                                    if (DateTime.TryParse(datespcs.Expressions[0], out DateTime time))
+                                    {
+                                        forecast.StartTime = time;
+                                    }
+                                    state.ForecastTimes.Add(forecast);
+                                }
+                                break;
+                        }                        
                     }
                 }
 

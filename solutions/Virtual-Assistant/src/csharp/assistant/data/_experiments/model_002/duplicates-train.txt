@@ -1,0 +1,10 @@
+Utterance	Intents
+will it be raining in ranchi	l_SAICVADemo_General, l_SAICVADemo_Weather
+i want to know the temperature at death valley	l_SAICVADemo_General, l_SAICVADemo_Weather
+what is the weather today at 10 day durham	l_SAICVADemo_General, l_SAICVADemo_Weather
+provide me by toronto weather please	l_SAICVADemo_General, l_SAICVADemo_Weather
+show me the forecast at alabama	l_SAICVADemo_General, l_SAICVADemo_Weather
+what is the weather in redmond	l_SAICVADemo_General, l_SAICVADemo_Weather
+what will the weather be tomorrow in accord new york	l_SAICVADemo_General, l_SAICVADemo_Weather
+go back	l_SAICVADemo_Calendar, l_SAICVADemo_General
+what ' s the weather going to be like in hawaii	l_SAICVADemo_General, l_SAICVADemo_Weather
