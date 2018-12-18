@@ -12,6 +12,7 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace WeatherSkill
 {
@@ -166,8 +167,9 @@ namespace WeatherSkill
             {
                 var state = await WeatherStateAccessor.GetAsync(dc.Context);
 
-                // extract entities and store in state here.
 
+
+                // extract entities and store in state here.
                 if (luisResult.Entities.Weather_Location!=null && luisResult.Entities.Weather_Location.Length>0)
                 {
                     state.Locations.Clear();

@@ -151,6 +151,15 @@ namespace WeatherSkill
                 case Events.SkillBeginEvent:
                     {
                         var state = await _stateAccessor.GetAsync(dc.Context, () => new WeatherSkillState());
+                        if (dc.Context.Activity.Value is Dictionary<string, object> userData)
+                        {
+                            //clear the state if it is not a continous intent
+                            if (userData.TryGetValue("ContinueIntent", out object isContinue) &&
+                                (isContinue is bool cont) && (!cont))
+                            {
+                                state.Clear();
+                            }
+                        }
                         break;
                     }
 

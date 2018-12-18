@@ -36,7 +36,16 @@ namespace WeatherSkill.ServiceClients
                         string message = $"In {geo.Location}, {response.Response.Daily.Summary}";
                         if (startdate!=null && startdate.HasValue)
                         {
-                            message = $"At {geo.Location} on {startdate.Value.ToString("d")}, {response.Response.Hourly.Summary}.";
+                            message = $"At {geo.Location} on {startdate.Value.ToString("d")}, {response.Response.Hourly.Summary}";
+                            if (response.Response.Currently.Temperature.HasValue)
+                            {
+                                message += $",the average temperature will be {response.Response.Currently.Temperature.Value}°F";
+                            }
+                            if (response.Response.Currently.Humidity.HasValue)
+                            {
+                                message += $",the humidity will be around {response.Response.Currently.Humidity.Value*100}%";
+                            }
+                            message += ".";
                         }
 
                         return message;

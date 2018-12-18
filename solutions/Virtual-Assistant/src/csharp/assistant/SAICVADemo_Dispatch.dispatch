@@ -5,7 +5,7 @@
     {
       "appId": "1ee6793e-dfda-442c-a612-3ebed6757e48",
       "authoringKey": "e9af031eb2b84bc6bde8dd0504eee5e5",
-      "subscriptionKey": "e9af031eb2b84bc6bde8dd0504eee5e5",
+      "subscriptionKey": "09aca0d54cb846f48f09dd16158490ee",
       "version": "0.1",
       "region": "westus",
       "type": "luis",
@@ -15,7 +15,7 @@
     {
       "appId": "b330305c-cd92-4feb-aac3-304d24704e1a",
       "authoringKey": "e9af031eb2b84bc6bde8dd0504eee5e5",
-      "subscriptionKey": "e9af031eb2b84bc6bde8dd0504eee5e5",
+      "subscriptionKey": "09aca0d54cb846f48f09dd16158490ee",
       "version": "0.1",
       "region": "westus",
       "type": "luis",
@@ -25,7 +25,7 @@
     {
       "appId": "0158bcf2-b753-492f-8f86-d6913d130fcc",
       "authoringKey": "e9af031eb2b84bc6bde8dd0504eee5e5",
-      "subscriptionKey": "e9af031eb2b84bc6bde8dd0504eee5e5",
+      "subscriptionKey": "09aca0d54cb846f48f09dd16158490ee",
       "version": "0.1",
       "region": "westus",
       "type": "luis",
@@ -35,7 +35,7 @@
     {
       "appId": "dca56853-7eac-4304-afe1-26b7af5d9157",
       "authoringKey": "e9af031eb2b84bc6bde8dd0504eee5e5",
-      "subscriptionKey": "e9af031eb2b84bc6bde8dd0504eee5e5",
+      "subscriptionKey": "09aca0d54cb846f48f09dd16158490ee",
       "version": "0.1",
       "region": "westus",
       "type": "luis",
@@ -45,7 +45,7 @@
     {
       "appId": "9df2f3b7-4106-40d6-a661-1f744c352c53",
       "authoringKey": "e9af031eb2b84bc6bde8dd0504eee5e5",
-      "subscriptionKey": "e9af031eb2b84bc6bde8dd0504eee5e5",
+      "subscriptionKey": "09aca0d54cb846f48f09dd16158490ee",
       "version": "0.1",
       "region": "westus",
       "type": "luis",
@@ -64,7 +64,7 @@
     {
       "appId": "110e4082-2701-47d9-9606-96c9a7007f8c",
       "authoringKey": "e9af031eb2b84bc6bde8dd0504eee5e5",
-      "subscriptionKey": "e90a86ee361d4e9ba59bd055b6afc383",
+      "subscriptionKey": "09aca0d54cb846f48f09dd16158490ee",
       "version": "0.1",
       "region": "westus",
       "type": "luis",
@@ -83,7 +83,7 @@
   ],
   "appId": "0e5dfb7f-177a-4841-a908-e05ff16dd29d",
   "authoringKey": "e9af031eb2b84bc6bde8dd0504eee5e5",
-  "subscriptionKey": "e9af031eb2b84bc6bde8dd0504eee5e5",
+  "subscriptionKey": "09aca0d54cb846f48f09dd16158490ee",
   "version": "Dispatch",
   "region": "westus",
   "type": "dispatch",

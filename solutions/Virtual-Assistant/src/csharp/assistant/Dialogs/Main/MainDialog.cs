@@ -63,7 +63,7 @@ namespace VirtualAssistant
             if (_services.SkillConfigurations.TryGetValue("calendarSkill", out ISkillConfiguration skill))
             {
                 if (skill.Properties.TryGetValue("allowAnonymousAccess", out object allowObject))
-                {
+                {   
                     bool.TryParse(allowObject as string, out allowAnonymousAccess);
                 }
             }
@@ -139,6 +139,8 @@ namespace VirtualAssistant
                                 case General.Intent.QueryOtherLocation:
                                     {
                                         var lastExecutedIntent = virtualAssistantState.LastIntent;
+                                        parameters["ContinueIntent"] = true;
+
                                         if (lastExecutedIntent != null)
                                         {
                                             var matchedSkill = _skillRouter.IdentifyRegisteredSkill(lastExecutedIntent);
@@ -173,6 +175,7 @@ namespace VirtualAssistant
                     {
                         virtualAssistantState.LastIntent = intent.ToString();
                         var matchedSkill = _skillRouter.IdentifyRegisteredSkill(intent.ToString());
+                        parameters["ContinueIntent"] = false;
 
                         await RouteToSkillAsync(dc, new SkillDialogOptions()
                         {

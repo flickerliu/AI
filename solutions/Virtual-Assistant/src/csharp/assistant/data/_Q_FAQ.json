@@ -8,7 +8,9 @@
         "What is a Virtual Assistant?"
       ],
       "metadata": [],
-      "alternateQuestionClusters": []
+      "alternateQuestionClusters": [],
+      "changeStatus": "NoChange",
+      "kbId": "46cc7f2a-ed08-49ea-b269-eb48a1015518"
     },
     {
       "id": 2,
@@ -18,7 +20,9 @@
         "What is a Skill?"
       ],
       "metadata": [],
-      "alternateQuestionClusters": []
+      "alternateQuestionClusters": [],
+      "changeStatus": "NoChange",
+      "kbId": "46cc7f2a-ed08-49ea-b269-eb48a1015518"
     },
     {
       "id": 3,
@@ -28,7 +32,9 @@
         "What can the Calendar Skill do?"
       ],
       "metadata": [],
-      "alternateQuestionClusters": []
+      "alternateQuestionClusters": [],
+      "changeStatus": "NoChange",
+      "kbId": "46cc7f2a-ed08-49ea-b269-eb48a1015518"
     },
     {
       "id": 4,
@@ -38,7 +44,9 @@
         "What can the Email Skill do?"
       ],
       "metadata": [],
-      "alternateQuestionClusters": []
+      "alternateQuestionClusters": [],
+      "changeStatus": "NoChange",
+      "kbId": "46cc7f2a-ed08-49ea-b269-eb48a1015518"
     },
     {
       "id": 5,
@@ -48,7 +56,9 @@
         "What can the Point of Interest Skill do?"
       ],
       "metadata": [],
-      "alternateQuestionClusters": []
+      "alternateQuestionClusters": [],
+      "changeStatus": "NoChange",
+      "kbId": "46cc7f2a-ed08-49ea-b269-eb48a1015518"
     },
     {
       "id": 6,
@@ -58,7 +68,9 @@
         "What can the ToDo Skill do?"
       ],
       "metadata": [],
-      "alternateQuestionClusters": []
+      "alternateQuestionClusters": [],
+      "changeStatus": "NoChange",
+      "kbId": "46cc7f2a-ed08-49ea-b269-eb48a1015518"
     },
     {
       "id": 7,
@@ -68,7 +80,9 @@
         "What's New"
       ],
       "metadata": [],
-      "alternateQuestionClusters": []
+      "alternateQuestionClusters": [],
+      "changeStatus": "NoChange",
+      "kbId": "46cc7f2a-ed08-49ea-b269-eb48a1015518"
     },
     {
       "id": 8,
@@ -78,7 +92,9 @@
         "What is that yellow light?"
       ],
       "metadata": [],
-      "alternateQuestionClusters": []
+      "alternateQuestionClusters": [],
+      "changeStatus": "NoChange",
+      "kbId": "46cc7f2a-ed08-49ea-b269-eb48a1015518"
     },
     {
       "id": 9,
@@ -88,7 +104,9 @@
         "How do I raise a bug?"
       ],
       "metadata": [],
-      "alternateQuestionClusters": []
+      "alternateQuestionClusters": [],
+      "changeStatus": "NoChange",
+      "kbId": "46cc7f2a-ed08-49ea-b269-eb48a1015518"
     }
   ]
 }
