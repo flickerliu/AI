@@ -14,6 +14,7 @@ using Microsoft.Bot.Schema;
 using Microsoft.Bot.Solutions;
 using Microsoft.Bot.Solutions.Dialogs;
 using Microsoft.Bot.Solutions.Skills;
+using Microsoft.Bot.Solutions.Util;
 
 namespace VirtualAssistant
 {
@@ -95,7 +96,7 @@ namespace VirtualAssistant
                         var luisIntent = luisResult?.TopIntent().intent;
 
                         // switch on general intents
-                        if (luisResult.TopIntent().score > 0.5)
+                        if (luisResult.TopIntent().score > Util.ScoreThreshold)
                         {
                             switch (luisIntent)
                             {

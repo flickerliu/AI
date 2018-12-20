@@ -6,6 +6,6 @@ namespace Microsoft.Bot.Solutions.Util
 {
     public class Util
     {
-        public static readonly double ScoreThreshold = 0.2f;
+        public static readonly double ScoreThreshold = 0.01f;
     }
 }

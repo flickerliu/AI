@@ -20,6 +20,8 @@
 
   <ItemGroup>
     <Compile Remove="Dialogs\Shared\Resources\Dispatch.cs" />
+    <Compile Remove="General.cs" />
+    <Compile Remove="Weather.cs" />
   </ItemGroup>
 
   <ItemGroup>
