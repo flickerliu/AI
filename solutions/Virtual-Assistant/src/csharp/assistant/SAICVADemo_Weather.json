@@ -8,6 +8,9 @@
       "name": "None"
     },
     {
+      "name": "Weather.ContextContinue"
+    },
+    {
       "name": "Weather.GetForecast",
       "inherits": {
         "domain_name": "Weather",
@@ -47,7 +50,7 @@
     {
       "activated": true,
       "name": "Clothes",
-      "words": "t-shirt,coat,skirt,jacket,sweater,pants,dress,vest,cover,jeans,fur,jackets,shirt,hat",
+      "words": "t-shirt,coat,skirt,jacket,sweater,pants,dress,vest,cover,jeans,fur,jackets,shirt,hat,skirts,t-shirts,t shirt",
       "mode": true
     }
   ],
@@ -56,6 +59,22 @@
     {
       "text": "\" i need to know the temperature at bangor , sme \"",
       "intent": "Weather.GetForecast",
+      "entities": []
+    },
+    {
+      "text": "and beijing?",
+      "intent": "Weather.ContextContinue",
+      "entities": [
+        {
+          "startPos": 4,
+          "endPos": 10,
+          "entity": "Weather.Location"
+        }
+      ]
+    },
+    {
+      "text": "and tomorrow?",
+      "intent": "Weather.ContextContinue",
       "entities": []
     },
     {
@@ -77,6 +96,60 @@
     {
       "text": "get the forcast for me",
       "intent": "Weather.GetForecast",
+      "entities": []
+    },
+    {
+      "text": "how about shenzhen",
+      "intent": "Weather.ContextContinue",
+      "entities": [
+        {
+          "startPos": 10,
+          "endPos": 17,
+          "entity": "Weather.Location"
+        }
+      ]
+    },
+    {
+      "text": "how about shenzhen in tomorrow?",
+      "intent": "Weather.ContextContinue",
+      "entities": [
+        {
+          "startPos": 10,
+          "endPos": 17,
+          "entity": "Weather.Location"
+        }
+      ]
+    },
+    {
+      "text": "how about skirt?",
+      "intent": "Weather.ContextContinue",
+      "entities": [
+        {
+          "startPos": 10,
+          "endPos": 14,
+          "entity": "Wear.Clothes"
+        }
+      ]
+    },
+    {
+      "text": "how about the weather in shenzhen?",
+      "intent": "Weather.GetForecast",
+      "entities": [
+        {
+          "startPos": 25,
+          "endPos": 32,
+          "entity": "Weather.Location"
+        }
+      ]
+    },
+    {
+      "text": "how about the weather tomorrow?",
+      "intent": "Weather.GetForecast",
+      "entities": []
+    },
+    {
+      "text": "how about tomorrow",
+      "intent": "Weather.ContextContinue",
       "entities": []
     },
     {

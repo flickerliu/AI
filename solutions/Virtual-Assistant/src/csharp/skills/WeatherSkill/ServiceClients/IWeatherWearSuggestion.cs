@@ -46,9 +46,9 @@ namespace WeatherSkill.ServiceClients
     {
         static clothesTempRange[] _clothesList = new clothesTempRange[]
         {
-            new clothesTempRange(20,100, "t-shirt","t-shirts","skirt","skirts","tshirt","tshirts","vest"),
-            new clothesTempRange(10,20, "jacket","jackets"),
-            new clothesTempRange(-100,10, "coat","coats","sweater","sweaters","cover","covers"),
+            new clothesTempRange(25,100, "t-shirt","t-shirts","skirt","skirts","tshirt","tshirts","vest"),
+            new clothesTempRange(15,25, "jacket","jackets"),
+            new clothesTempRange(-100,15, "coat","coats","sweater","sweaters","cover","covers"),
         };
 
         static public clothesTempRange GetTempRange(string clothes)

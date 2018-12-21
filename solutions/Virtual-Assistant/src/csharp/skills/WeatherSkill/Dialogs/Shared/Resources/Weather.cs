@@ -19,6 +19,7 @@ namespace Luis
         public enum Intent
         {
             None,
+            Weather_ContextContinue,
             Weather_GetForecast,
             Weather_Wear
         };

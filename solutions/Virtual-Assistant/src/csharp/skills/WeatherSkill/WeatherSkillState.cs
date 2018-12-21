@@ -18,12 +18,14 @@ namespace WeatherSkill
         public List<string> Locations;
         public List<ForecastTime> ForecastTimes;
         public List<string> Clothes;
+        public Weather.Intent? LastIntent;
 
         public WeatherSkillState()
         {
             Locations = new List<string>();
             ForecastTimes = new List<ForecastTime>();
             Clothes = new List<string>();
+            LastIntent = null;
         }
 
         public void Clear()
@@ -31,6 +33,7 @@ namespace WeatherSkill
             Locations.Clear();
             ForecastTimes.Clear();
             Clothes.Clear();
+            LastIntent = null;
         }
 
         public Luis.Weather LuisResult { get; set; }

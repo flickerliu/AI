@@ -30,6 +30,7 @@ namespace WeatherSkill
         private IStatePropertyAccessor<DialogState> _dialogStateAccessor;
         private WeatherSkillResponseBuilder _responseBuilder = new WeatherSkillResponseBuilder();
         private bool _allowAnonymousAccess = false;
+        private Dictionary<Weather.Intent, string> _mapDialog; 
 
         public MainDialog(ISkillConfiguration services, ConversationState conversationState, UserState userState, IServiceManager serviceManager, bool skillMode)
             : base(nameof(MainDialog))
@@ -91,23 +92,30 @@ namespace WeatherSkill
                 {
                     case Weather.Intent.Weather_GetForecast:
                         {
-                            await dc.BeginDialogAsync(nameof(WeatherForecastDialog), skillOptions);
-                            if (_skillMode)
-                            {
-                                await CompleteAsync(dc);
-                            }
+                            state.Clear();
+                            state.LastIntent = intent;
 
+                            await dc.BeginDialogAsync(_mapDialog[intent.Value], skillOptions);
                             break;
                         }
 
                     case Weather.Intent.Weather_Wear:
                         {
-                            await dc.BeginDialogAsync(nameof(WeatherWearDialog), skillOptions);
-                            if (_skillMode)
-                            {
-                                await CompleteAsync(dc);
-                            }
+                            state.LastIntent = intent;
+                            await dc.BeginDialogAsync(_mapDialog[intent.Value], skillOptions);
+                            break;
+                        }
 
+                    case Weather.Intent.Weather_ContextContinue:
+                        {
+                            if (state.LastIntent.HasValue)
+                            {
+                                await dc.BeginDialogAsync(_mapDialog[state.LastIntent.Value], skillOptions);
+                            }
+                            else
+                            {
+                                await dc.BeginDialogAsync(_mapDialog[Weather.Intent.Weather_GetForecast], skillOptions);
+                            }
                             break;
                         }
 
@@ -161,7 +169,9 @@ namespace WeatherSkill
             {
                 case Events.SkillBeginEvent:
                     {
+                        /*
                         var state = await _stateAccessor.GetAsync(dc.Context, () => new WeatherSkillState());
+                        
                         if (dc.Context.Activity.Value is Dictionary<string, object> userData)
                         {
                             //clear the state if it is not a continous intent
@@ -170,7 +180,7 @@ namespace WeatherSkill
                             {
                                 state.Clear();
                             }
-                        }
+                        }*/
                         break;
                     }
 
@@ -283,8 +293,14 @@ namespace WeatherSkill
 
         private void RegisterDialogs()
         {
+            _mapDialog = new Dictionary<Weather.Intent, string>();
+
             AddDialog(new WeatherForecastDialog(_services, _stateAccessor, _dialogStateAccessor, _serviceManager));
+            _mapDialog.Add(Weather.Intent.Weather_GetForecast, nameof(WeatherForecastDialog));
+
             AddDialog(new WeatherWearDialog(_services, _stateAccessor, _dialogStateAccessor, _serviceManager));
+            _mapDialog.Add(Weather.Intent.Weather_Wear, nameof(WeatherWearDialog));
+
             AddDialog(new CancelDialog());
         }
 

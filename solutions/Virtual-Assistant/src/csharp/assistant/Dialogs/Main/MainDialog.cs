@@ -140,7 +140,6 @@ namespace VirtualAssistant
                                 case General.Intent.QueryOtherLocation:
                                     {
                                         var lastExecutedIntent = virtualAssistantState.LastIntent;
-                                        parameters["ContinueIntent"] = true;
 
                                         if (lastExecutedIntent != null)
                                         {
@@ -176,7 +175,6 @@ namespace VirtualAssistant
                     {
                         virtualAssistantState.LastIntent = intent.ToString();
                         var matchedSkill = _skillRouter.IdentifyRegisteredSkill(intent.ToString());
-                        parameters["ContinueIntent"] = false;
 
                         await RouteToSkillAsync(dc, new SkillDialogOptions()
                         {
