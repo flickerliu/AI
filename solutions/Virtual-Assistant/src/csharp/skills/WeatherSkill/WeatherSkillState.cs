@@ -17,17 +17,20 @@ namespace WeatherSkill
     {
         public List<string> Locations;
         public List<ForecastTime> ForecastTimes;
+        public List<string> Clothes;
 
         public WeatherSkillState()
         {
             Locations = new List<string>();
             ForecastTimes = new List<ForecastTime>();
+            Clothes = new List<string>();
         }
 
         public void Clear()
         {
             Locations.Clear();
             ForecastTimes.Clear();
+            Clothes.Clear();
         }
 
         public Luis.Weather LuisResult { get; set; }

@@ -100,6 +100,17 @@ namespace WeatherSkill
                             break;
                         }
 
+                    case Weather.Intent.Weather_Wear:
+                        {
+                            await dc.BeginDialogAsync(nameof(WeatherWearDialog), skillOptions);
+                            if (_skillMode)
+                            {
+                                await CompleteAsync(dc);
+                            }
+
+                            break;
+                        }
+
                     case Weather.Intent.None:
                         {
                             await dc.Context.SendActivityAsync(dc.Context.Activity.CreateReply(WeatherSkillSharedResponses.DidntUnderstandMessage));
@@ -273,6 +284,7 @@ namespace WeatherSkill
         private void RegisterDialogs()
         {
             AddDialog(new WeatherForecastDialog(_services, _stateAccessor, _dialogStateAccessor, _serviceManager));
+            AddDialog(new WeatherWearDialog(_services, _stateAccessor, _dialogStateAccessor, _serviceManager));
             AddDialog(new CancelDialog());
         }
 

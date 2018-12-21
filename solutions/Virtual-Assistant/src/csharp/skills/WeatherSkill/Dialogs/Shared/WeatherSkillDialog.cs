@@ -167,8 +167,6 @@ namespace WeatherSkill
             {
                 var state = await WeatherStateAccessor.GetAsync(dc.Context);
 
-
-
                 // extract entities and store in state here.
                 if (luisResult.Entities.Weather_Location!=null && luisResult.Entities.Weather_Location.Length>0)
                 {
@@ -213,6 +211,18 @@ namespace WeatherSkill
                                 }
                                 break;
                         }                        
+                    }
+                }
+
+                if (luisResult.Entities.Wear_Clothes != null && luisResult.Entities.Wear_Clothes.Length > 0)
+                {
+                    state.Clothes.Clear();
+                    foreach (var cloth in luisResult.Entities.Wear_Clothes)
+                    {
+                        if (!state.Clothes.Contains(cloth))
+                        {
+                            state.Clothes.Add(cloth);
+                        }
                     }
                 }
 

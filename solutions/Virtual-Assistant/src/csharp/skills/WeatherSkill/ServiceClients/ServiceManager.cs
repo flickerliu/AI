@@ -13,6 +13,9 @@ namespace WeatherSkill
         //use darksky as weather forcast service
         public static IWeatherForecast ForcastService = new DarkSkyWeatherService("5ac8487620c5ec434fcd2dd87f77c997");
 
+        //use darksky as weather wear suggestion service
+        public static IWeatherWearSuggestion WearSuggestionService = new DarkSkyWeatherService("5ac8487620c5ec434fcd2dd87f77c997");
+
         public ServiceManager(ISkillConfiguration config)
         {
             _skillConfig = config;
